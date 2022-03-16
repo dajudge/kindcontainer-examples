@@ -1,0 +1,6 @@
+include 'test-apiserver'
+include 'test-mockserver'
+include 'test-shared'
+include 'test-kind'
+include 'operator'
+include 'showcases'

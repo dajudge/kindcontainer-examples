@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.franzbecker:gradle-lombok:5.0.0"
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.franzbecker.gradle-lombok'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation "io.fabric8:kubernetes-client:5.11.2"
+
+        testImplementation 'junit:junit:4.13.2'
+        testImplementation 'com.dajudge.kindcontainer:kindcontainer:1.1.0'
+        testImplementation 'io.fabric8:kubernetes-server-mock:5.11.2'
+        testImplementation 'org.awaitility:awaitility:4.1.1'
+        testImplementation 'io.rest-assured:rest-assured:4.5.1'
+
+        testRuntimeOnly 'ch.qos.logback:logback-classic:1.2.10'
+    }
+
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+
+    lombok {
+        version = '1.18.20'
+    }
+}

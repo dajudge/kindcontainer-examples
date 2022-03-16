@@ -1,0 +1,47 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: greeter-operator
+rules:
+  - apiGroups:
+      - "apps"
+    resources:
+      - "deployments"
+    verbs: [ "get",  "list", "create", "update", "patch" ]
+  - apiGroups:
+      - ""
+    resources:
+      - "services"
+      - "configmaps"
+    verbs: [ "get",  "list", "create", "update", "patch" ]
+  - apiGroups:
+      - "networking.k8s.io"
+    resources:
+      - "ingresses"
+    verbs: [ "get",  "list", "create", "update", "patch" ]
+  - apiGroups:
+      - "kindcontainer.dajudge.com"
+    resources:
+      - "greeters"
+    verbs: [ "get",  "list", "watch" ]
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: greeter-operator
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: greeter-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: greeter-operator
+subjects:
+  - kind: ServiceAccount
+    name: greeter-operator
+    namespace: default

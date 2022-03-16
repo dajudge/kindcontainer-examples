@@ -1,0 +1,8 @@
+apiVersion: kindcontainer.dajudge.com/v1
+kind: Greeter
+metadata:
+  name: my-greeter
+  namespace: default
+spec:
+  greeting: "Hello, world!"
+  host: "hello.127.0.0.1.nip.io"
